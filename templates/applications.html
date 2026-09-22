@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications • HireFlow AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar recruiter">
+
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Recruiter</p>
+    </div>
+
+    <nav>
+        <a href="/recruiter">🏠 Dashboard</a>
+        <a href="/applications" class="active">📄 Applications</a>
+        <a href="/logout">🚪 Logout</a>
+    </nav>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Applications</h1>
+            <p>AI evaluated candidate resumes</p>
+        </div>
+
+        <div class="profile">
+            <div class="avatar purple-avatar">R</div>
+            <div>
+                <h4>Recruiter</h4>
+                <small>AI Matching</small>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% if apps %}
+
+        {% for app in apps %}
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2>{{ app.name }}</h2>
+                    <p>{{ app.email }}</p>
+                </div>
+
+                <span>{{ app.job }}</span>
+
+            </div>
+
+            <hr style="margin:18px 0;border:none;border-top:1px solid #eee;">
+
+            <div class="cards" style="grid-template-columns:1fr 1fr;">
+
+                <div class="card blue">
+                    <h2>{{ app.score }}%</h2>
+                    <p>AI Match Score</p>
+                </div>
+
+                <div class="card {% if app.status=='Shortlisted' %}green{% elif app.status=='Rejected' %}orange{% else %}purple{% endif %}">
+                    <h2>{{ app.status }}</h2>
+                    <p>Application Status</p>
+                </div>
+
+            </div>
+
+            <div style="margin-top:20px">
+
+                <h3>🤖 AI Explanation</h3>
+
+                <p style="margin-top:10px;color:#4b5563;line-height:28px;">
+                    {{ app.explanation }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>📂 No Applications Yet</h2>
+
+            <p>
+                Upload resumes from the Recruiter Dashboard.
+                AI results will automatically appear here.
+            </p>
+
+            <a href="/recruiter" class="link-btn">
+                Upload Resume
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

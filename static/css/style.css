@@ -1,6 +1,9 @@
-/* ===========================
-   HIREFLOW AI - COMPLETE CSS
-=========================== */
+/* ===================================================
+   HIREFLOW AI - COMPLETE PROFESSIONAL STYLESHEET
+   Version: Phase 2
+=================================================== */
+
+/* ================= RESET ================= */
 
 *{
     margin:0;
@@ -60,7 +63,7 @@ body{
     padding:16px;
     border-radius:14px;
     margin-bottom:14px;
-    backdrop-filter:blur(6px);
+    backdrop-filter:blur(8px);
 }
 
 .right-panel{
@@ -80,14 +83,16 @@ body{
     margin-bottom:28px;
 }
 
+/* ================= FORM ================= */
+
 form{
     display:flex;
     flex-direction:column;
 }
 
 label{
-    margin-bottom:6px;
     font-weight:600;
+    margin-bottom:6px;
     color:#374151;
 }
 
@@ -101,6 +106,7 @@ textarea{
     margin-bottom:18px;
     font-size:15px;
     outline:none;
+    transition:.2s;
 }
 
 input:focus,
@@ -114,11 +120,11 @@ textarea{
     resize:vertical;
 }
 
-.demo{
-    text-align:center;
-    color:#64748b;
-    margin-top:18px;
-    font-size:14px;
+input[type=file]{
+    background:white;
+    padding:12px;
+    border:2px dashed #cbd5e1;
+    border-radius:10px;
 }
 
 /* ================= BUTTONS ================= */
@@ -131,9 +137,9 @@ button{
 }
 
 form button{
-    padding:15px;
     background:#2563eb;
     color:white;
+    padding:15px;
     border-radius:12px;
     font-size:16px;
 }
@@ -152,7 +158,6 @@ form button:hover{
 
 .btn-primary:hover{
     background:#1d4ed8;
-    transform:translateY(-2px);
 }
 
 .btn-secondary{
@@ -166,11 +171,22 @@ form button:hover{
     background:#d1d5db;
 }
 
-.btn-link{
+.link-btn{
     text-decoration:none;
+    background:#7c3aed;
+    color:white;
+    padding:14px 22px;
+    border-radius:12px;
+    font-weight:600;
+    display:inline-block;
+    transition:.25s;
 }
 
-/* ================= DASHBOARD ================= */
+.link-btn:hover{
+    background:#6d28d9;
+}
+
+/* ================= SIDEBAR ================= */
 
 .sidebar{
     position:fixed;
@@ -219,6 +235,8 @@ form button:hover{
 .sidebar a.active{
     background:rgba(255,255,255,.18);
 }
+
+/* ================= MAIN ================= */
 
 .main{
     margin-left:250px;
@@ -346,25 +364,39 @@ td{
 }
 
 th{
-    color:#64748b;
     background:#f9fafb;
+    color:#64748b;
 }
 
 /* ================= STATUS ================= */
 
 .status{
+    color:white;
     padding:6px 12px;
     border-radius:20px;
-    color:white;
     font-size:12px;
     font-weight:600;
 }
 
-.active{background:#16a34a;}
-.closed{background:#ef4444;}
-.shortlisted{background:#2563eb;}
-.interviewed{background:#7c3aed;}
-.applied{background:#f59e0b;}
+.active{
+    background:#16a34a;
+}
+
+.closed{
+    background:#ef4444;
+}
+
+.applied{
+    background:#f59e0b;
+}
+
+.shortlisted{
+    background:#2563eb;
+}
+
+.interviewed{
+    background:#7c3aed;
+}
 
 /* ================= CREATE JOB ================= */
 
@@ -382,15 +414,7 @@ th{
     margin-bottom:25px;
 }
 
-.form-container button{
-    background:#2563eb;
-    color:white;
-    padding:15px;
-    border-radius:12px;
-    font-size:16px;
-}
-
-/* ================= JOB PAGE ================= */
+/* ================= JOBS PAGE ================= */
 
 .jobs-page{
     width:1100px;
@@ -404,51 +428,7 @@ th{
     margin-bottom:20px;
 }
 
-.link-btn{
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    padding:12px 18px;
-    border-radius:10px;
-    font-weight:600;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-
-    .login-container{
-        grid-template-columns:1fr;
-        height:auto;
-    }
-
-    .left-panel{
-        display:none;
-    }
-
-    .sidebar{
-        width:80px;
-    }
-
-    .sidebar .brand p,
-    .sidebar .brand h2{
-        display:none;
-    }
-
-    .sidebar a{
-        text-align:center;
-        padding:14px 0;
-    }
-
-    .main{
-        margin-left:80px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-}
-/* Empty State */
+/* ================= EMPTY STATE ================= */
 
 .empty-state{
     text-align:center;
@@ -465,22 +445,124 @@ th{
     margin-bottom:25px;
 }
 
-.jobs-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+/* ================= DEMO ================= */
+
+.demo{
+    text-align:center;
+    color:#64748b;
+    margin-top:18px;
+    font-size:14px;
 }
 
-.link-btn{
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .login-container{
+        grid-template-columns:1fr;
+    }
+
+    .left-panel{
+        display:none;
+    }
+
+    .sidebar{
+        width:80px;
+    }
+
+    .sidebar .brand h2,
+    .sidebar .brand p{
+        display:none;
+    }
+
+    .sidebar a{
+        text-align:center;
+        padding:14px 0;
+        font-size:0;
+    }
+
+    .main{
+        margin-left:80px;
+        padding:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .form-container{
+        width:100%;
+    }
+}
+.chart-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+    margin-top:20px;
+}
+
+.chart-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.chart-card h3{
+    margin-bottom:15px;
+}
+
+.chart-card canvas{
+    width:100% !important;
+    height:280px !important;
+}
+/* ================= AI APPLICATION CARD ================= */
+
+.panel h3{
+    color:#2563eb;
+    margin-bottom:8px;
+}
+
+.panel hr{
+    border:none;
+    border-top:1px solid #e5e7eb;
+}
+
+.chart-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.chart-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.chart-card canvas{
+    width:100% !important;
+    height:320px !important;
+}
+/* ===== FIX QUICK ACTION BUTTONS ===== */
+
+.btn-link,
+.btn-primary,
+.btn-secondary{
     text-decoration:none;
-    background:#2563eb;
-    color:white;
-    padding:12px 18px;
-    border-radius:10px;
-    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.link-btn:hover{
-    background:#1d4ed8;
+.actions a{
+    text-decoration:none;
 }

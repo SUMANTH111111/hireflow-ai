@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Job | HireFlow AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
 <div class="form-container">
@@ -25,6 +28,7 @@
         <input type="text" name="location" required>
 
         <label>Job Type</label>
+
         <select name="job_type" required>
             <option value="">Select Job Type</option>
             <option value="Full Time">Full Time</option>
@@ -34,13 +38,17 @@
         </select>
 
         <label>Salary</label>
-        <input type="text" name="salary" placeholder="₹8 LPA" required>
+        <input type="text" name="salary" placeholder="₹18 LPA" required>
 
         <label>Required Skills</label>
-        <textarea name="skills" rows="4" placeholder="Python, Flask, MySQL" required></textarea>
+        <textarea name="skills" rows="4"
+        placeholder="Python, Prompt Engineering, LLM, RAG, Vector DB"
+        required></textarea>
 
         <label>Job Description</label>
-        <textarea name="description" rows="6" placeholder="Describe the role..." required></textarea>
+        <textarea name="description" rows="8"
+        placeholder="Describe the role, responsibilities, qualifications and experience..."
+        required></textarea>
 
         <button type="submit">Create Job</button>
 

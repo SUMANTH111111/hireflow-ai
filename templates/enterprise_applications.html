@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Applicants | HireFlow AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Enterprise</p>
+    </div>
+
+    <nav>
+        <a href="/enterprise">🏠 Dashboard</a>
+        <a href="/jobs">💼 My Jobs</a>
+        <a href="/enterprise/applications" class="active">📄 Applicants</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/logout">🚪 Logout</a>
+    </nav>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <div>
+            <h1>Applicants</h1>
+            <p>All candidates across every job</p>
+        </div>
+
+        <div class="profile">
+            <div class="avatar">G</div>
+            <div>
+                <h4>Google HR</h4>
+                <small>Enterprise</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card">
+
+        <div class="panel-head">
+            <h2>Candidate Applications</h2>
+            <span>{{ apps|length }} Total</span>
+        </div>
+
+        {% if apps %}
+
+        <table>
+
+            <tr>
+                <th>Candidate</th>
+                <th>Email</th>
+                <th>Job Role</th>
+                <th>AI Score</th>
+                <th>Status</th>
+            </tr>
+
+            {% for app in apps %}
+
+            <tr>
+                <td>{{ app.name }}</td>
+                <td>{{ app.email }}</td>
+                <td>{{ app.job }}</td>
+                <td><b>{{ app.score }}%</b></td>
+
+                <td>
+                    {% if app.status == "Shortlisted" %}
+                        <span class="status shortlisted">{{ app.status }}</span>
+
+                    {% elif app.status == "Rejected" %}
+                        <span class="status closed">{{ app.status }}</span>
+
+                    {% else %}
+                        <span class="status applied">{{ app.status }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5" style="background:#fafafa;color:#4b5563;font-size:14px;">
+                    <b>AI Explanation:</b> {{ app.explanation }}
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="empty-state">
+            <h2>📂 No Applications Yet</h2>
+            <p>Candidates will appear here after resumes are uploaded.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

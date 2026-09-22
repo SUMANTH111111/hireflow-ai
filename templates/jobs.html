@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Jobs</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Jobs | HireFlow AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
 <div class="sidebar">
@@ -17,10 +22,13 @@
         <a href="/enterprise">🏠 Dashboard</a>
         <a href="/jobs" class="active">💼 My Jobs</a>
         <a href="/new-job">➕ Create Job</a>
-        <a href="/">🚪 Logout</a>
+        <a href="/enterprise/applications">📄 Applicants</a>
+        <a href="/analytics">📊 Analytics</a>
+        <a href="/logout">🚪 Logout</a>
     </nav>
 
 </div>
+
 
 <div class="main">
 
@@ -28,11 +36,11 @@
 
         <div>
             <h1>My Posted Jobs</h1>
-            <p>All jobs created in the database</p>
+            <p>All jobs available in the database</p>
         </div>
 
-        <a href="/new-job" class="btn-link">
-            <button class="btn-primary">+ New Job</button>
+        <a href="/new-job" class="btn-primary btn-link">
+            + New Job
         </a>
 
     </div>
@@ -53,11 +61,11 @@
 
             {% for job in jobs %}
             <tr>
-                <td>{{ job[0] }}</td>
-                <td>{{ job[1] }}</td>
-                <td>{{ job[2] }}</td>
-                <td>{{ job[3] }}</td>
-                <td>{{ job[4] }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.department }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.job_type }}</td>
+                <td>{{ job.salary }}</td>
             </tr>
             {% endfor %}
 
@@ -66,8 +74,12 @@
         {% else %}
 
         <div class="empty-state">
-            <h2>📂 No jobs found</h2>
+            <h2>📂 No Jobs Found</h2>
             <p>Create your first job to see it here.</p>
+
+            <a href="/new-job" class="link-btn">
+                Create Job
+            </a>
         </div>
 
         {% endif %}

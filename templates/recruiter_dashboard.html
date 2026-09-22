@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruiter Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Recruiter Dashboard • HireFlow AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+
+<!-- ================= SIDEBAR ================= -->
 
 <div class="sidebar recruiter">
 
@@ -17,83 +22,207 @@
 
     <nav>
         <a href="/recruiter" class="active">🏠 Dashboard</a>
-        <a href="#">👥 Candidates</a>
-        <a href="#">🤖 AI Matching</a>
-        <a href="#">📁 Applications</a>
-        <a href="/">🚪 Logout</a>
+        <a href="/applications">📄 Applications</a>
+        <a href="/logout">🚪 Logout</a>
     </nav>
 
 </div>
 
+
+<!-- ================= MAIN ================= -->
+
 <div class="main">
+
+    <!-- TOPBAR -->
 
     <div class="topbar">
 
         <div>
             <h1>Recruiter Dashboard</h1>
-            <p>Welcome back 👋</p>
+            <p>Upload resumes & AI automatically evaluates candidates</p>
         </div>
 
         <div class="profile">
+
             <div class="avatar purple-avatar">R</div>
+
             <div>
                 <h4>Recruiter</h4>
-                <small>HR Team</small>
+                <small>AI Matching</small>
             </div>
+
         </div>
 
     </div>
 
+
+    <!-- STATS -->
+
     <div class="cards">
 
         <div class="card purple">
-            <h2>0</h2>
-            <p>Resumes</p>
+            <h2>{{ total_resumes }}</h2>
+            <p>Total Resumes</p>
         </div>
 
         <div class="card blue">
-            <h2>0</h2>
-            <p>Matched</p>
+            <h2>{{ shortlisted }}</h2>
+            <p>Shortlisted</p>
         </div>
 
         <div class="card green">
-            <h2>0</h2>
+            <h2>{{ interviewed }}</h2>
             <p>Interviewed</p>
         </div>
 
     </div>
 
+
+    <!-- UPLOAD FORM -->
+
     <div class="panel">
 
         <div class="panel-head">
-            <h2>Recruitment Tools</h2>
-            <span>Coming Soon</span>
+            <h2>Upload Candidate Resume</h2>
+            <span>AI Powered</span>
         </div>
 
-        <div class="actions">
-            <button class="btn-primary">Upload Resume</button>
-            <button class="btn-secondary">Run AI Matching</button>
-        </div>
+        <form action="/upload-resume"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <label>Candidate Name</label>
+            <input
+                type="text"
+                name="full_name"
+                placeholder="Enter full name"
+                required
+            >
+
+            <label>Email Address</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="candidate@email.com"
+                required
+            >
+
+            <label>Phone Number</label>
+            <input
+                type="text"
+                name="phone"
+                placeholder="+91 XXXXX XXXXX"
+                required
+            >
+
+            <label>Select Job Role</label>
+
+            <select name="job_id" required>
+
+                <option value="">
+                    -- Select Job --
+                </option>
+
+                {% for job in jobs %}
+                <option value="{{ job.job_id }}">
+                    {{ job.title }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+            <label>Resume (PDF)</label>
+
+            <input
+                type="file"
+                name="resume"
+                accept=".pdf"
+                required
+            >
+
+            <button type="submit">
+                Upload & Run AI Analysis
+            </button>
+
+        </form>
 
     </div>
+
+
+    <!-- RECENT APPLICATIONS -->
 
     <div class="table-card">
 
         <div class="panel-head">
-            <h2>Candidate Pipeline</h2>
-            <span>Empty</span>
+            <h2>Recent AI Evaluations</h2>
+            <span>Latest 5</span>
         </div>
+
+        {% if applications %}
+
+        <table>
+
+            <tr>
+                <th>Candidate</th>
+                <th>Job</th>
+                <th>AI Score</th>
+                <th>Status</th>
+            </tr>
+
+            {% for app in applications %}
+
+            <tr>
+
+                <td>{{ app.full_name }}</td>
+
+                <td>{{ app.title }}</td>
+
+                <td><b>{{ app.match_score }}%</b></td>
+
+                <td>
+
+                    {% if app.status=="Shortlisted" %}
+
+                        <span class="status shortlisted">
+                            Shortlisted
+                        </span>
+
+                    {% elif app.status=="Rejected" %}
+
+                        <span class="status closed">
+                            Rejected
+                        </span>
+
+                    {% else %}
+
+                        <span class="status applied">
+                            Applied
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
 
         <div class="empty-state">
 
-            <h2>🤖 No candidates yet</h2>
+            <h2>📄 No Resume Uploaded</h2>
 
             <p>
-                Upload resumes and run AI Matching.
-                Candidates will appear here automatically.
+                Upload your first candidate resume to let HireFlow AI
+                calculate the compatibility score automatically.
             </p>
 
         </div>
+
+        {% endif %}
 
     </div>
 

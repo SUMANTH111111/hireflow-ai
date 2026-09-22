@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | HireFlow AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Enterprise</p>
+    </div>
+
+    <nav>
+        <a href="/enterprise">🏠 Dashboard</a>
+        <a href="/jobs">💼 My Jobs</a>
+        <a href="/enterprise/applications">📄 Applicants</a>
+        <a href="/analytics" class="active">📊 Analytics</a>
+        <a href="/logout">🚪 Logout</a>
+    </nav>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Recruitment Analytics</h1>
+            <p>Live hiring insights powered by HireFlow AI</p>
+        </div>
+
+        <div class="profile">
+            <div class="avatar">G</div>
+            <div>
+                <h4>Google HR</h4>
+                <small>Enterprise</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>Jobs by Department</h3>
+            <canvas id="deptChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Application Status</h3>
+            <canvas id="statusChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="panel-head">
+            <h2>AI Recruitment Summary</h2>
+            <span>Live Database</span>
+        </div>
+
+        <p style="margin-top:20px;color:#64748b;line-height:28px;">
+            The analytics page updates automatically whenever a new job is
+            created or a candidate submits a resume. All charts are generated
+            directly from your MySQL database.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Flask JSON -->
+
+<script id="dept-labels" type="application/json">
+{{ departments | tojson }}
+</script>
+
+<script id="dept-values" type="application/json">
+{{ department_counts | tojson }}
+</script>
+
+<script id="status-labels" type="application/json">
+{{ statuses | tojson }}
+</script>
+
+<script id="status-values" type="application/json">
+{{ status_counts | tojson }}
+</script>
+
+<script>
+
+const deptLabels = JSON.parse(
+document.getElementById("dept-labels").textContent);
+
+const deptValues = JSON.parse(
+document.getElementById("dept-values").textContent);
+
+new Chart(document.getElementById("deptChart"),{
+
+type:"bar",
+
+data:{
+labels:deptLabels,
+datasets:[{
+label:"Jobs",
+data:deptValues,
+borderWidth:1
+}]
+},
+
+options:{
+responsive:true,
+plugins:{
+legend:{display:false}
+},
+scales:{
+y:{beginAtZero:true}
+}
+}
+
+});
+
+const statusLabels = JSON.parse(
+document.getElementById("status-labels").textContent);
+
+const statusValues = JSON.parse(
+document.getElementById("status-values").textContent);
+
+new Chart(document.getElementById("statusChart"),{
+
+type:"doughnut",
+
+data:{
+labels:statusLabels,
+datasets:[{
+data:statusValues
+}]
+},
+
+options:{
+responsive:true,
+plugins:{
+legend:{position:"bottom"}
+}
+}
+
+});
+
+</script>
+
+</body>
+</html>
