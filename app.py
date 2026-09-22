@@ -498,9 +498,9 @@ def analytics():
     )
 
 
-# ==========================================
+# ==========================
 # ENTERPRISE APPLICATIONS
-# ==========================================
+# ==========================
 
 @app.route("/enterprise/applications")
 def enterprise_applications():
@@ -515,11 +515,13 @@ def enterprise_applications():
             a.match_score,
             a.explanation,
             a.status
+
         FROM applications a
         JOIN candidates c
             ON a.candidate_id = c.candidate_id
         JOIN jobs j
             ON a.job_id = j.job_id
+
         ORDER BY a.applied_at DESC
     """)
 
@@ -543,8 +545,13 @@ def enterprise_applications():
         "enterprise_applications.html",
         apps=apps
     )
+# ==========================
+# VIEW RESUME
+# ==========================
 
-
+@app.route("/resume/<filename>")
+def view_resume(filename):
+    return redirect(f"/static/uploads/resumes/{filename}")
 # ==========================================
 # LOGOUT
 # ==========================================

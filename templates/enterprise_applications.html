@@ -8,7 +8,10 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+
+<!-- ================= SIDEBAR ================= -->
 
 <div class="sidebar">
 
@@ -27,9 +30,12 @@
 
 </div>
 
+<!-- ================= MAIN ================= -->
+
 <div class="main">
 
     <div class="topbar">
+
         <div>
             <h1>Applicants</h1>
             <p>All candidates across every job</p>
@@ -42,7 +48,10 @@
                 <small>Enterprise</small>
             </div>
         </div>
+
     </div>
+
+    <!-- ================= TABLE ================= -->
 
     <div class="table-card">
 
@@ -78,6 +87,9 @@
                     {% elif app.status == "Rejected" %}
                         <span class="status closed">{{ app.status }}</span>
 
+                    {% elif app.status == "Interviewed" %}
+                        <span class="status interviewed">{{ app.status }}</span>
+
                     {% else %}
                         <span class="status applied">{{ app.status }}</span>
                     {% endif %}
@@ -85,8 +97,10 @@
             </tr>
 
             <tr>
-                <td colspan="5" style="background:#fafafa;color:#4b5563;font-size:14px;">
-                    <b>AI Explanation:</b> {{ app.explanation }}
+                <td colspan="5"
+                    style="background:#fafafa;color:#4b5563;font-size:14px;line-height:24px;padding:14px 18px;">
+                    <b>AI Explanation:</b><br>
+                    {{ app.explanation }}
                 </td>
             </tr>
 

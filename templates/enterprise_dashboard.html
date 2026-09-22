@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Dashboard • HireFlow AI</title>
+    <title>Enterprise Dashboard | HireFlow AI</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
 
-<!-- ================= SIDEBAR ================= -->
-
 <div class="sidebar">
-
     <div class="brand">
         <h2>HireFlow AI</h2>
         <p>Enterprise</p>
@@ -22,43 +18,29 @@
 
     <nav>
         <a href="/enterprise" class="active">🏠 Dashboard</a>
-        <a href="/jobs">💼 Jobs</a>
-        <a href="/applications">📄 Applicants</a>
+        <a href="/enterprise/jobs">💼 My Jobs</a>
+        <a href="/enterprise/applications">📄 Applicants</a>
         <a href="/analytics">📊 Analytics</a>
         <a href="/logout">🚪 Logout</a>
     </nav>
-
 </div>
-
-
-<!-- ================= MAIN ================= -->
 
 <div class="main">
 
-    <!-- TOPBAR -->
-
     <div class="topbar">
-
         <div>
             <h1>Enterprise Dashboard</h1>
             <p>Welcome back, Google HR</p>
         </div>
 
         <div class="profile">
-
             <div class="avatar">G</div>
-
             <div>
                 <h4>Google HR</h4>
                 <small>Enterprise</small>
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- CARDS -->
 
     <div class="cards">
 
@@ -79,17 +61,11 @@
 
     </div>
 
-
-    <!-- QUICK ACTIONS -->
-
     <div class="panel">
 
         <div class="panel-head">
-
             <h2>Quick Actions</h2>
-
             <span>Live</span>
-
         </div>
 
         <div class="actions">
@@ -110,24 +86,16 @@
 
     </div>
 
-
-    <!-- RECENT JOBS -->
-
     <div class="table-card">
 
         <div class="panel-head">
-
             <h2>Recent Job Openings</h2>
-
             <span>{{ total_jobs }} Jobs</span>
-
         </div>
-
 
         {% if recent_jobs %}
 
         <table>
-
             <tr>
                 <th>Role</th>
                 <th>Department</th>
@@ -135,13 +103,11 @@
             </tr>
 
             {% for job in recent_jobs %}
-
             <tr>
                 <td>{{ job.title }}</td>
                 <td>{{ job.department }}</td>
                 <td>{{ job.location }}</td>
             </tr>
-
             {% endfor %}
 
         </table>
@@ -149,49 +115,15 @@
         {% else %}
 
         <div class="empty-state">
-
             <h2>💼 No Jobs Created</h2>
-
-            <p>
-                Create your first job opening to start recruiting.
-            </p>
+            <p>Create your first job opening.</p>
 
             <a href="/new-job" class="link-btn">
                 Create First Job
             </a>
-
         </div>
 
         {% endif %}
-
-    </div>
-
-
-    <!-- LIVE OVERVIEW -->
-
-    <div class="panel">
-
-        <div class="panel-head">
-
-            <h2>Recruitment Overview</h2>
-
-            <span>Real Time</span>
-
-        </div>
-
-        <div style="margin-top:18px;color:#4b5563;line-height:30px;">
-
-            <p>• Total Jobs Posted: <b>{{ total_jobs }}</b></p>
-
-            <p>• Total Applications Received: <b>{{ total_applicants }}</b></p>
-
-            <p>• Active Hiring Positions: <b>{{ active_jobs }}</b></p>
-
-            <p style="margin-top:15px;">
-                Every job created and every resume uploaded updates this dashboard automatically from MySQL.
-            </p>
-
-        </div>
 
     </div>
 
