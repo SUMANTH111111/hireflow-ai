@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar recruiter">
+
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Recruiter</p>
+    </div>
+
+    <nav>
+        <a href="#" class="active">🏠 Dashboard</a>
+        <a href="#">👥 Candidates</a>
+        <a href="#">🤖 AI Matching</a>
+        <a href="#">📁 Applications</a>
+        <a href="#">⚙ Settings</a>
+    </nav>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Recruiter Dashboard</h1>
+            <p>Manage candidates & AI matching</p>
+        </div>
+
+        <div class="profile">
+            <div class="avatar purple-avatar">R</div>
+            <div>
+                <h4>Recruiter</h4>
+                <small>AI Hiring Team</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card purple">
+            <h2>126</h2>
+            <p>Resumes</p>
+        </div>
+
+        <div class="card blue">
+            <h2>31</h2>
+            <p>Matched</p>
+        </div>
+
+        <div class="card green">
+            <h2>9</h2>
+            <p>Interviewed</p>
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Recruitment Tools</h2>
+            <span>AI Powered</span>
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary">Upload Resume</button>
+            <button class="btn-secondary">Run AI Matching</button>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <h2>Candidate Pipeline</h2>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Match</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>Rahul Sharma</td>
+                <td>94%</td>
+                <td><span class="status interviewed">Interviewed</span></td>
+            </tr>
+
+            <tr>
+                <td>Priya Patel</td>
+                <td>89%</td>
+                <td><span class="status shortlisted">Shortlisted</span></td>
+            </tr>
+
+            <tr>
+                <td>Arjun Kumar</td>
+                <td>81%</td>
+                <td><span class="status applied">Applied</span></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

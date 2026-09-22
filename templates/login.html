@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireFlow AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-page">
+
+<div class="login-container">
+
+    <div class="left-panel">
+        <h1>HireFlow AI</h1>
+        <p>AI Powered Recruitment Platform</p>
+
+        <div class="feature">
+            🤖 Smart Resume Matching
+        </div>
+
+        <div class="feature">
+            📄 Enterprise Job Management
+        </div>
+
+        <div class="feature">
+            ⚡ Recruit Faster with AI
+        </div>
+    </div>
+
+    <div class="right-panel">
+
+        <h2>Welcome Back</h2>
+        <p class="small">Login to continue</p>
+
+        <form action="/login" method="POST">
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <label>Role</label>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="enterprise">Enterprise</option>
+                <option value="recruiter">Recruiter</option>
+            </select>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p class="demo">
+            Demo users are stored in MySQL
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

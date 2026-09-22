@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Enterprise</p>
+    </div>
+
+    <nav>
+        <a href="#" class="active">🏠 Dashboard</a>
+        <a href="#">💼 Jobs</a>
+        <a href="#">📄 Applicants</a>
+        <a href="#">📊 Analytics</a>
+        <a href="#">⚙ Settings</a>
+    </nav>
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <div>
+            <h1>Enterprise Dashboard</h1>
+            <p>Welcome back, Google HR</p>
+        </div>
+
+        <div class="profile">
+            <div class="avatar">G</div>
+            <div>
+                <h4>Google HR</h4>
+                <small>Enterprise</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards">
+
+        <div class="card blue">
+            <h2>12</h2>
+            <p>Total Jobs</p>
+        </div>
+
+        <div class="card green">
+            <h2>48</h2>
+            <p>Applicants</p>
+        </div>
+
+        <div class="card orange">
+            <h2>8</h2>
+            <p>Active Jobs</p>
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Quick Actions</h2>
+            <span>Phase 1</span>
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary">+ Create New Job</button>
+            <button class="btn-secondary">View My Jobs</button>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <h2>Recent Job Openings</h2>
+
+        <table>
+            <tr>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>Python Developer</td>
+                <td>AI Team</td>
+                <td><span class="status active">Active</span></td>
+            </tr>
+
+            <tr>
+                <td>Data Analyst</td>
+                <td>Cloud</td>
+                <td><span class="status active">Active</span></td>
+            </tr>
+
+            <tr>
+                <td>Frontend Intern</td>
+                <td>UI/UX</td>
+                <td><span class="status closed">Closed</span></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
