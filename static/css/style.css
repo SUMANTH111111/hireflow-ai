@@ -1,30 +1,35 @@
+/* ===========================
+   HIREFLOW AI - COMPLETE CSS
+=========================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:"Segoe UI",sans-serif;
 }
 
 body{
-    background:#eef2ff;
+    background:#f5f7fb;
     color:#111827;
 }
 
 /* ================= LOGIN ================= */
 
 .login-page{
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
+    padding:30px;
 }
 
 .login-container{
     width:980px;
-    height:560px;
+    max-width:100%;
     background:white;
-    border-radius:22px;
+    border-radius:24px;
     overflow:hidden;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -41,12 +46,13 @@ body{
 }
 
 .left-panel h1{
-    font-size:44px;
+    font-size:42px;
+    margin-bottom:10px;
 }
 
 .left-panel p{
-    margin:15px 0 35px;
     opacity:.9;
+    margin-bottom:35px;
 }
 
 .feature{
@@ -54,6 +60,7 @@ body{
     padding:16px;
     border-radius:14px;
     margin-bottom:14px;
+    backdrop-filter:blur(6px);
 }
 
 .right-panel{
@@ -65,11 +72,12 @@ body{
 
 .right-panel h2{
     font-size:34px;
+    margin-bottom:8px;
 }
 
 .small{
     color:#64748b;
-    margin-bottom:30px;
+    margin-bottom:28px;
 }
 
 form{
@@ -80,51 +88,94 @@ form{
 label{
     margin-bottom:6px;
     font-weight:600;
+    color:#374151;
 }
 
-input,select{
+input,
+select,
+textarea{
+    width:100%;
     padding:14px;
     border:1px solid #d1d5db;
     border-radius:12px;
     margin-bottom:18px;
     font-size:15px;
+    outline:none;
 }
 
 input:focus,
-select:focus{
-    outline:none;
+select:focus,
+textarea:focus{
     border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
 }
 
+textarea{
+    resize:vertical;
+}
+
+.demo{
+    text-align:center;
+    color:#64748b;
+    margin-top:18px;
+    font-size:14px;
+}
+
+/* ================= BUTTONS ================= */
+
 button{
+    border:none;
     cursor:pointer;
     transition:.25s;
+    font-weight:600;
 }
 
 form button{
+    padding:15px;
     background:#2563eb;
     color:white;
-    padding:14px;
-    border:none;
     border-radius:12px;
     font-size:16px;
-    font-weight:600;
 }
 
 form button:hover{
     background:#1d4ed8;
+    transform:translateY(-2px);
 }
 
-.demo{
-    margin-top:18px;
-    color:#64748b;
-    text-align:center;
+.btn-primary{
+    background:#2563eb;
+    color:white;
+    padding:14px 24px;
+    border-radius:12px;
+}
+
+.btn-primary:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    background:#e5e7eb;
+    color:#111827;
+    padding:14px 24px;
+    border-radius:12px;
+}
+
+.btn-secondary:hover{
+    background:#d1d5db;
+}
+
+.btn-link{
+    text-decoration:none;
 }
 
 /* ================= DASHBOARD ================= */
 
 .sidebar{
     position:fixed;
+    left:0;
+    top:0;
     width:250px;
     height:100vh;
     background:linear-gradient(180deg,#2563eb,#1d4ed8);
@@ -136,13 +187,17 @@ form button:hover{
     background:linear-gradient(180deg,#7c3aed,#5b21b6);
 }
 
+.brand{
+    margin-bottom:35px;
+}
+
 .brand h2{
     font-size:28px;
 }
 
 .brand p{
     opacity:.8;
-    margin:6px 0 30px;
+    margin-top:6px;
 }
 
 .sidebar nav{
@@ -152,19 +207,16 @@ form button:hover{
 }
 
 .sidebar a{
-    color:white;
     text-decoration:none;
+    color:white;
     padding:14px 16px;
     border-radius:12px;
-    display:flex;
-    align-items:center;
-    gap:10px;
     transition:.2s;
     font-weight:500;
 }
 
 .sidebar a:hover,
-.sidebar .active{
+.sidebar a.active{
     background:rgba(255,255,255,.18);
 }
 
@@ -181,39 +233,41 @@ form button:hover{
 }
 
 .topbar h1{
-    font-size:42px;
+    font-size:38px;
 }
 
 .topbar p{
     color:#64748b;
-    margin-top:6px;
+    margin-top:5px;
 }
 
 .profile{
     background:white;
-    padding:10px 16px;
-    border-radius:16px;
     display:flex;
     align-items:center;
     gap:12px;
+    padding:10px 16px;
+    border-radius:16px;
     box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
 
 .avatar{
-    width:45px;
-    height:45px;
+    width:46px;
+    height:46px;
     border-radius:50%;
     background:#2563eb;
     color:white;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     font-weight:bold;
 }
 
 .purple-avatar{
     background:#7c3aed;
 }
+
+/* ================= CARDS ================= */
 
 .cards{
     display:grid;
@@ -224,17 +278,17 @@ form button:hover{
 
 .card{
     border-radius:18px;
-    color:white;
     padding:26px;
+    color:white;
     box-shadow:0 12px 22px rgba(0,0,0,.08);
 }
 
 .card h2{
-    font-size:46px;
+    font-size:44px;
 }
 
 .card p{
-    margin-top:10px;
+    margin-top:8px;
     opacity:.95;
 }
 
@@ -243,13 +297,16 @@ form button:hover{
 .orange{background:#ea580c;}
 .purple{background:#7c3aed;}
 
+/* ================= PANELS ================= */
+
 .panel,
-.table-card{
+.table-card,
+.form-container{
     background:white;
     border-radius:18px;
     padding:25px;
-    margin-bottom:25px;
     box-shadow:0 8px 20px rgba(0,0,0,.05);
+    margin-bottom:25px;
 }
 
 .panel-head{
@@ -273,30 +330,7 @@ form button:hover{
     margin-top:22px;
 }
 
-.btn-primary{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:14px 22px;
-    border-radius:12px;
-    font-weight:600;
-}
-
-.btn-primary:hover{
-    background:#1d4ed8;
-}
-
-.btn-secondary{
-    background:#e5e7eb;
-    border:none;
-    padding:14px 22px;
-    border-radius:12px;
-    font-weight:600;
-}
-
-.btn-secondary:hover{
-    background:#d1d5db;
-}
+/* ================= TABLE ================= */
 
 table{
     width:100%;
@@ -304,15 +338,19 @@ table{
     margin-top:18px;
 }
 
-th,td{
-    text-align:left;
+th,
+td{
     padding:16px;
+    text-align:left;
     border-bottom:1px solid #e5e7eb;
 }
 
 th{
     color:#64748b;
+    background:#f9fafb;
 }
+
+/* ================= STATUS ================= */
 
 .status{
     padding:6px 12px;
@@ -327,3 +365,122 @@ th{
 .shortlisted{background:#2563eb;}
 .interviewed{background:#7c3aed;}
 .applied{background:#f59e0b;}
+
+/* ================= CREATE JOB ================= */
+
+.form-container{
+    width:850px;
+    margin:40px auto;
+}
+
+.form-container h1{
+    margin-bottom:8px;
+}
+
+.form-container p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.form-container button{
+    background:#2563eb;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+}
+
+/* ================= JOB PAGE ================= */
+
+.jobs-page{
+    width:1100px;
+    margin:40px auto;
+}
+
+.jobs-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.link-btn{
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .login-container{
+        grid-template-columns:1fr;
+        height:auto;
+    }
+
+    .left-panel{
+        display:none;
+    }
+
+    .sidebar{
+        width:80px;
+    }
+
+    .sidebar .brand p,
+    .sidebar .brand h2{
+        display:none;
+    }
+
+    .sidebar a{
+        text-align:center;
+        padding:14px 0;
+    }
+
+    .main{
+        margin-left:80px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+}
+/* Empty State */
+
+.empty-state{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.empty-state h2{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.empty-state p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.jobs-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.link-btn{
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.link-btn:hover{
+    background:#1d4ed8;
+}

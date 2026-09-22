@@ -15,94 +15,130 @@
     </div>
 
     <nav>
-        <a href="#" class="active">🏠 Dashboard</a>
-        <a href="#">💼 Jobs</a>
-        <a href="#">📄 Applicants</a>
+        <a href="/enterprise" class="active">🏠 Dashboard</a>
+        <a href="/jobs">💼 My Jobs</a>
+        <a href="/new-job">➕ Create Job</a>
         <a href="#">📊 Analytics</a>
-        <a href="#">⚙ Settings</a>
+        <a href="/">🚪 Logout</a>
     </nav>
 </div>
 
 <div class="main">
 
     <div class="topbar">
+
         <div>
             <h1>Enterprise Dashboard</h1>
-            <p>Welcome back, Google HR</p>
+            <p>Welcome back, Google HR 👋</p>
         </div>
 
         <div class="profile">
             <div class="avatar">G</div>
+
             <div>
                 <h4>Google HR</h4>
                 <small>Enterprise</small>
             </div>
         </div>
+
     </div>
+
+    <!-- LIVE CARDS -->
 
     <div class="cards">
 
         <div class="card blue">
-            <h2>12</h2>
+            <h2>{{ total_jobs }}</h2>
             <p>Total Jobs</p>
         </div>
 
         <div class="card green">
-            <h2>48</h2>
-            <p>Applicants</p>
+            <h2>{{ total_applicants }}</h2>
+            <p>Total Applicants</p>
         </div>
 
         <div class="card orange">
-            <h2>8</h2>
+            <h2>{{ active_jobs }}</h2>
             <p>Active Jobs</p>
         </div>
 
     </div>
 
+    <!-- QUICK ACTIONS -->
+
     <div class="panel">
 
         <div class="panel-head">
             <h2>Quick Actions</h2>
-            <span>Phase 1</span>
+            <span>Live</span>
         </div>
 
         <div class="actions">
-            <button class="btn-primary">+ Create New Job</button>
-            <button class="btn-secondary">View My Jobs</button>
+
+            <a href="/new-job" class="btn-link">
+                <button class="btn-primary">
+                    + Create New Job
+                </button>
+            </a>
+
+            <a href="/jobs" class="btn-link">
+                <button class="btn-secondary">
+                    View My Jobs
+                </button>
+            </a>
+
         </div>
 
     </div>
 
+    <!-- RECENT JOBS FROM DATABASE -->
+
     <div class="table-card">
 
-        <h2>Recent Job Openings</h2>
+        <div class="panel-head">
+            <h2>Recent Job Openings</h2>
+            <span>Database</span>
+        </div>
+
+        {% if recent_jobs %}
 
         <table>
+
             <tr>
                 <th>Role</th>
                 <th>Department</th>
-                <th>Status</th>
+                <th>Location</th>
             </tr>
 
-            <tr>
-                <td>Python Developer</td>
-                <td>AI Team</td>
-                <td><span class="status active">Active</span></td>
-            </tr>
+            {% for job in recent_jobs %}
 
             <tr>
-                <td>Data Analyst</td>
-                <td>Cloud</td>
-                <td><span class="status active">Active</span></td>
+                <td>{{ job[0] }}</td>
+                <td>{{ job[1] }}</td>
+                <td>{{ job[2] }}</td>
             </tr>
 
-            <tr>
-                <td>Frontend Intern</td>
-                <td>UI/UX</td>
-                <td><span class="status closed">Closed</span></td>
-            </tr>
+            {% endfor %}
 
         </table>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <h2>📂 No Jobs Yet</h2>
+
+            <p>
+                Create your first job and it will automatically appear here.
+            </p>
+
+            <a href="/new-job" class="link-btn">
+                Create First Job
+            </a>
+
+        </div>
+
+        {% endif %}
 
     </div>
 

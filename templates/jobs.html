@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Jobs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        <h2>HireFlow AI</h2>
+        <p>Enterprise</p>
+    </div>
+
+    <nav>
+        <a href="/enterprise">🏠 Dashboard</a>
+        <a href="/jobs" class="active">💼 My Jobs</a>
+        <a href="/new-job">➕ Create Job</a>
+        <a href="/">🚪 Logout</a>
+    </nav>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>My Posted Jobs</h1>
+            <p>All jobs created in the database</p>
+        </div>
+
+        <a href="/new-job" class="btn-link">
+            <button class="btn-primary">+ New Job</button>
+        </a>
+
+    </div>
+
+    <div class="table-card">
+
+        {% if jobs %}
+
+        <table>
+
+            <tr>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Salary</th>
+            </tr>
+
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job[0] }}</td>
+                <td>{{ job[1] }}</td>
+                <td>{{ job[2] }}</td>
+                <td>{{ job[3] }}</td>
+                <td>{{ job[4] }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="empty-state">
+            <h2>📂 No jobs found</h2>
+            <p>Create your first job to see it here.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Job | HireFlow AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+
+    <h1>Create New Job</h1>
+    <p>Post a new opportunity for candidates.</p>
+
+    <form action="/create-job" method="POST">
+
+        <label>Job Title</label>
+        <input type="text" name="title" required>
+
+        <label>Department</label>
+        <input type="text" name="department" required>
+
+        <label>Location</label>
+        <input type="text" name="location" required>
+
+        <label>Job Type</label>
+        <select name="job_type" required>
+            <option value="">Select Job Type</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Internship">Internship</option>
+            <option value="Contract">Contract</option>
+        </select>
+
+        <label>Salary</label>
+        <input type="text" name="salary" placeholder="₹8 LPA" required>
+
+        <label>Required Skills</label>
+        <textarea name="skills" rows="4" placeholder="Python, Flask, MySQL" required></textarea>
+
+        <label>Job Description</label>
+        <textarea name="description" rows="6" placeholder="Describe the role..." required></textarea>
+
+        <button type="submit">Create Job</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
