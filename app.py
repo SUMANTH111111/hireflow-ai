@@ -246,9 +246,9 @@ def create_job():
     return redirect("/enterprise")
 
 
-# ==========================================
-# MY JOBS
-# ==========================================
+# ==========================
+# RECRUITER / MY JOBS
+# ==========================
 
 @app.route("/jobs")
 def jobs():
@@ -282,6 +282,45 @@ def jobs():
     cur.close()
 
     return render_template("jobs.html", jobs=jobs)
+
+
+# ==========================
+# ENTERPRISE MY JOBS
+# ==========================
+
+@app.route("/enterprise/jobs")
+def enterprise_jobs():
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("""
+        SELECT
+            title,
+            department,
+            location,
+            job_type,
+            salary
+        FROM jobs
+        ORDER BY created_at DESC
+    """)
+
+    rows = cur.fetchall()
+
+    jobs = []
+
+    for row in rows:
+        jobs.append({
+            "title": row[0],
+            "department": row[1],
+            "location": row[2],
+            "job_type": row[3],
+            "salary": row[4]
+        })
+
+    cur.close()
+
+    return render_template("jobs.html", jobs=jobs)
+
 # ==========================================
 # AI RESUME UPLOAD
 # ==========================================
