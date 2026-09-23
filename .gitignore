@@ -1,4 +1,15 @@
+# Environment
 .env
+.venv/
+
+# Python
 __pycache__/
 *.pyc
-.venv/
+
+# Uploaded resumes
+static/uploads/resumes/
+static/uploads/resumes/**
+
+# OS
+.DS_Store
+Thumbs.db
