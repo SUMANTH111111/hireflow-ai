@@ -1,66 +1,64 @@
-from ai.parser import parse_resume
-from ai.scorer import semantic_similarity
+import os
+import json
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 
 def calculate_match(resume_text, job_description, job_skills):
 
-    parsed = parse_resume(resume_text)
+    prompt = f"""
+You are an expert ATS (Applicant Tracking System).
 
-    job_text = f"{job_description} {job_skills}"
+Evaluate ONLY this resume against the given job.
 
-    semantic = semantic_similarity(
-        resume_text,
-        job_text
+JOB DESCRIPTION:
+{job_description}
+
+REQUIRED SKILLS:
+{job_skills}
+
+RESUME:
+{resume_text}
+
+Return ONLY valid JSON.
+
+{{
+  "score": 91,
+  "experience_years": 5,
+  "matched_skills": ["Python","LangChain"],
+  "missing_skills": ["Docker"],
+  "recommendation": "Shortlisted",
+  "explanation": "Strong prompt engineering experience with relevant AI projects."
+}}
+
+Rules:
+- Score between 0 and 100
+- Detect experience from dates like 2021–Present
+- 85+ = Shortlisted
+- 60–84 = Applied
+- Below 60 = Rejected
+- Explanation under 60 words
+"""
+
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=prompt
     )
 
-    # -----------------------------
-    # Intelligent scoring
-    # -----------------------------
+    text = response.text.strip()
+    text = text.replace("```json", "").replace("```", "").strip()
 
-    score = semantic * 60
-
-    score += min(len(parsed["skills"]), 10) * 3
-
-    score += min(parsed["years"], 5) * 2
-
-    score += min(parsed["projects"], 5)
-
-    score += min(parsed["certifications"], 3)
-
-    if parsed["education"]:
-        score += 2
-
-    score = round(min(score, 98))
-
-    # -----------------------------
-    # AI Explanation
-    # -----------------------------
-
-    if score >= 90:
-        level = "Excellent Match"
-
-    elif score >= 75:
-        level = "Strong Match"
-
-    elif score >= 60:
-        level = "Moderate Match"
-
-    else:
-        level = "Weak Match"
-
-    skills = parsed["skills"][:8]
-
-    skill_text = (
-        ", ".join(skills)
-        if skills
-        else "general software engineering skills"
-    )
+    data = json.loads(text)
 
     explanation = (
-        f"{level}. "
-        f"The resume demonstrates approximately {parsed['years']} years of relevant experience, "
-        f"{parsed['projects']} project(s), and expertise in {skill_text}. "
-        "Semantic analysis indicates that the candidate aligns well with the responsibilities and technical requirements of this job role."
+        f"{data['explanation']} "
+        f"Experience: {data['experience_years']} years. "
+        f"Matched Skills: {', '.join(data['matched_skills'])}. "
+        f"Missing Skills: {', '.join(data['missing_skills']) if data['missing_skills'] else 'None'}."
     )
 
-    return score, explanation
+    return int(data["score"]), explanation

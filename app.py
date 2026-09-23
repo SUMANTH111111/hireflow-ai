@@ -404,9 +404,9 @@ def upload_resume():
 
     # -------- Decision Logic --------
 
-    if score >= 90:
+    if score >= 85:
         status = "Shortlisted"
-    elif score >= 70:
+    elif score >= 60:
         status = "Applied"
     else:
         status = "Rejected"
