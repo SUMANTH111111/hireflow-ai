@@ -22,7 +22,7 @@
 
     <nav>
         <a href="/enterprise">🏠 Dashboard</a>
-        <a href="/jobs">💼 My Jobs</a>
+        <a href="/enterprise/jobs">💼 My Jobs</a>
         <a href="/enterprise/applications" class="active">📄 Applicants</a>
         <a href="/analytics">📊 Analytics</a>
         <a href="/logout">🚪 Logout</a>
@@ -57,10 +57,10 @@
 
         <div class="panel-head">
             <h2>Candidate Applications</h2>
-            <span>{{ apps|length }} Total</span>
+            <span>{{ applicants|length }} Total</span>
         </div>
 
-        {% if apps %}
+        {% if applicants %}
 
         <table>
 
@@ -69,10 +69,11 @@
                 <th>Email</th>
                 <th>Job Role</th>
                 <th>AI Score</th>
+                <th>Resume</th>
                 <th>Status</th>
             </tr>
 
-            {% for app in apps %}
+            {% for app in applicants %}
 
             <tr>
                 <td>{{ app.name }}</td>
@@ -81,25 +82,49 @@
                 <td><b>{{ app.score }}%</b></td>
 
                 <td>
-                    {% if app.status == "Shortlisted" %}
-                        <span class="status shortlisted">{{ app.status }}</span>
-
-                    {% elif app.status == "Rejected" %}
-                        <span class="status closed">{{ app.status }}</span>
-
-                    {% elif app.status == "Interviewed" %}
-                        <span class="status interviewed">{{ app.status }}</span>
-
-                    {% else %}
-                        <span class="status applied">{{ app.status }}</span>
-                    {% endif %}
+                    <a href="{{ url_for('static', filename='uploads/resumes/' + app.resume) }}"
+                       target="_blank"
+                       style="text-decoration:none;font-weight:600;color:#2563eb;">
+                        📄 View PDF
+                    </a>
                 </td>
+
+                <td>
+                    <form action="/update-status/{{ app.id }}" method="POST">
+
+                        <select name="status" onchange="this.form.submit()">
+
+                            <option value="Applied"
+                                {% if app.status == "Applied" %}selected{% endif %}>
+                                Applied
+                            </option>
+
+                            <option value="Shortlisted"
+                                {% if app.status == "Shortlisted" %}selected{% endif %}>
+                                Shortlisted
+                            </option>
+
+                            <option value="Interviewed"
+                                {% if app.status == "Interviewed" %}selected{% endif %}>
+                                Interviewed
+                            </option>
+
+                            <option value="Rejected"
+                                {% if app.status == "Rejected" %}selected{% endif %}>
+                                Rejected
+                            </option>
+
+                        </select>
+
+                    </form>
+                </td>
+
             </tr>
 
             <tr>
-                <td colspan="5"
+                <td colspan="6"
                     style="background:#fafafa;color:#4b5563;font-size:14px;line-height:24px;padding:14px 18px;">
-                    <b>AI Explanation:</b><br>
+                    <b>🤖 AI Explanation:</b><br>
                     {{ app.explanation }}
                 </td>
             </tr>

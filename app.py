@@ -536,10 +536,9 @@ def analytics():
         status_counts=status_counts
     )
 
-
-# ==========================
+# ==========================================
 # ENTERPRISE APPLICATIONS
-# ==========================
+# ==========================================
 
 @app.route("/enterprise/applications")
 def enterprise_applications():
@@ -548,49 +547,68 @@ def enterprise_applications():
 
     cur.execute("""
         SELECT
+            a.application_id,
             c.full_name,
             c.email,
+            c.resume_file,
             j.title,
             a.match_score,
             a.explanation,
             a.status
-
         FROM applications a
         JOIN candidates c
             ON a.candidate_id = c.candidate_id
         JOIN jobs j
             ON a.job_id = j.job_id
-
         ORDER BY a.applied_at DESC
     """)
 
     rows = cur.fetchall()
+    cur.close()
 
-    apps = []
+    applicants = []
 
     for row in rows:
-        apps.append({
-            "name": row[0],
-            "email": row[1],
-            "job": row[2],
-            "score": row[3],
-            "explanation": row[4],
-            "status": row[5]
+        applicants.append({
+            "id": row[0],
+            "name": row[1],
+            "email": row[2],
+            "resume": row[3],
+            "job": row[4],
+            "score": row[5],
+            "explanation": row[6],
+            "status": row[7]
         })
-
-    cur.close()
 
     return render_template(
         "enterprise_applications.html",
-        apps=apps
+        applicants=applicants
     )
-# ==========================
-# VIEW RESUME
-# ==========================
 
-@app.route("/resume/<filename>")
-def view_resume(filename):
-    return redirect(f"/static/uploads/resumes/{filename}")
+
+# ==========================================
+# UPDATE APPLICATION STATUS
+# ==========================================
+
+@app.route("/update-status/<int:id>", methods=["POST"])
+def update_status(id):
+
+    new_status = request.form["status"]
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("""
+        UPDATE applications
+        SET status=%s
+        WHERE application_id=%s
+    """, (new_status, id))
+
+    mysql.connection.commit()
+    cur.close()
+
+    return redirect("/enterprise/applications")
+
+
 # ==========================================
 # LOGOUT
 # ==========================================
